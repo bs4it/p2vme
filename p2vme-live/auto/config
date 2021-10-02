@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -e
+
+lb config noauto \
+	--architectures amd64 \
+	--distribution bullseye \
+	--apt-recommends false \
+	--apt-indices false \
+	--archive-areas "main contrib non-free" \
+	--security true \
+	--cache true \
+	--binary-images iso-hybrid \
+	--memtest memtest86+ \
+	--mode debian \
+	--debootstrap-options "--variant=minbase" \
+	--bootappend-live "boot=live components hostname=p2vme username=p2vme silent toram quiet" \
+	--bootappend-live-failsafe "boot=live components hostname=p2vme username=p2vme silent toram" \
+	--debian-installer none \
+	--debian-installer-gui false \
+	--firmware-binary true \
+	--iso-application P2VME \
+	--iso-preparer P2VME \
+	--iso-publisher P2VME \
+	--iso-volume P2VME \
+	--image-name p2vme \
+	--chroot-squashfs-compression-type xz \
+	"${@}"

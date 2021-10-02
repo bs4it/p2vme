@@ -1,0 +1,1 @@
+user-setup sudo iputils-ping iproute2 traceroute dnsutils netcat nmap iptraf-ng iperf3 sysstat

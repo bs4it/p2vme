@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+chown www-data:www-data /var/www/html/ -R
+ln -s /var/www/html/p2vme.conf /etc/tgt/conf.d/
