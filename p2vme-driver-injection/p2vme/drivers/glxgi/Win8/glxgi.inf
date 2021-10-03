@@ -1,0 +1,76 @@
+;;;
+;;; Glx
+;;;
+;;;
+;;; Copyright © 2010-2019 VMware, Inc. All rights reserved.
+;;;
+
+[Version]
+Class             = "System"
+ClassGUID         = {4d36e97d-e325-11ce-bfc1-08002be10318}
+Signature         = "$Windows NT$"
+Provider          = %VMW%
+DriverVer = 10/07/2019,2.3.0.0
+CatalogFile       = glxgi.cat
+DriverPackageType = KernelService
+
+[DestinationDirs]
+DefaultDestDir = 12
+DriverFiles    = 12  ; %windir%\system32\drivers
+
+;; Exclude drivers from "Add New Hardware" list.
+[ControlFlags]
+ExcludeFromSelect = *
+
+;;
+;; Install sections
+;;
+[DefaultInstall]
+CopyFiles  = DriverFiles
+
+[DefaultInstall.Services]
+AddService = %ServiceName%,0x00000001,Service
+
+;;
+;; Uninstall sections
+;;
+[DefaultUninstall]
+DelFiles   = DriverFiles
+
+[DefaultUninstall.Services]
+DelService = %ServiceName% 0x200
+;0x200 ensure service is stopped before deleting.
+
+;;
+;; Services Section
+;;
+[Service]
+DisplayName    = %ServiceName%
+Description    = %ServiceDescription%
+ServiceBinary  = %12%\glxgi.sys
+ServiceType    = 1      ; SERVICE_KERNEL_DRIVER
+StartType      = 4      ; SERVICE_DISABLED
+ErrorControl   = 1      ; SERVICE_ERROR_NORMAL
+LoadOrderGroup = "AppDefense"
+
+;;
+;; Copy Files
+;;
+[DriverFiles]
+glxgi.sys
+
+[SourceDisksNames]
+1 = %DiskId%
+
+[SourceDisksFiles]
+glxgi.sys = 1
+
+;;
+;; String Section
+;;
+[Strings]
+VMW                = "VMware, Inc."
+ServiceDescription = "Guest Integrity Driver"
+ServiceName        = "glxgi"
+DiskId             = "Guest Integrity Installation Disk"
+DefaultInstance    = "glxgi Instance"

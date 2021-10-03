@@ -1,0 +1,60 @@
+;;;
+;;; GIAppDef
+;;;
+;;;
+;;; Copyright © 2017-2020 VMware, Inc. All rights reserved.
+;;;
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = WFPCALLOUTS
+ClassGuid   = {57465043-616C-6C6F-7574-5F636C617373}
+Provider    = %VMW%
+CatalogFile = giappdef.cat
+DriverPackageType = KernelService
+DriverVer = 02/06/2020,2.3.1.0
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+GIAppDef.sys  = 1,,
+
+[DestinationDirs]
+DefaultDestDir = 12  ; %windir%\system32\drivers
+DriverFiles    = 12  ; %windir%\system32\drivers
+
+; -------------- GIAppDef driver install sections
+[DefaultInstall]
+    OptionDesc = %GIAppDef.SVCDESC%
+    CopyFiles  = GIAppDef.DriverFiles
+
+[DefaultInstall.Services]
+    AddService = %GIAppDef.SVCNAME%,,GIAppDef.Service
+
+[DefaultUninstall]
+    DelFiles   = GIAppDef.DriverFiles
+
+[DefaultUninstall.Services]
+    DelService = %GIAppDef.SVCNAME%,0x200 ; SPSVCINST_STOPSERVICE
+
+[GIAppDef.DriverFiles]
+    GIAppDef.sys,,,0x00000020             ; COPYFLG_NO_VERSION_DIALOG
+
+[GIAppDef.Service]
+DisplayName    = %GIAppDef.SVCNAME%
+Description    = %GIAppDef.SVCDESC%
+ServiceType    = 1                        ; SERVICE_KERNEL_DRIVER
+;;;Setting this to BOOT_START will cause DIFX to request a reboot.
+;;;To avoid this we need to set the DMFLAGS_MODIFY_BOOT_START_TYPE flag
+;;;and set giappdef.INF to be SERVICE_SYSTEM_START
+StartType      = 1                        ; SERVICE_SYSTEM_START
+ErrorControl   = 1                        ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\GIAppDef.sys        ; %WinDir%\System32\Drivers\GIAppDef.sys
+
+; -------------- GIAppDef strings sections
+[Strings]
+VMW                 = "VMware, Inc."
+DiskName            = "GLX AppDefense Installation Disk"
+GIAppDef.SVCNAME    = "GIAppDef"
+GIAppDef.SVCDESC    = "GLX AppDefense Service"
