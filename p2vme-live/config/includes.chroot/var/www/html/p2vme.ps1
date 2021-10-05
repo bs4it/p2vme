@@ -352,15 +352,17 @@ $rdm | ForEach-Object {
     Write-Host -ForegroundColor Yellow $device_short_name
     $SetVM = $CreateVM | New-HardDisk -DiskType RawVirtual -DeviceName $_.ConsoleDeviceName
 }
-Write-Host -NoNewline -ForegroundColor Gray "Setting SCSI controller type back to "
-Write-Host -ForegroundColor Yellow $ControllerType.Type
-$SetVM = $CreateVM | Get-ScsiController | Set-ScsiController -Type $ControllerType.Type
+Write-Host -NoNewline -ForegroundColor Gray "Setting SCSI controller type to "
+Write-Host -ForegroundColor Yellow "ParaVirtual"
+$SetVM = $CreateVM | Get-ScsiController | Set-ScsiController -Type ParaVirtual
+#Write-Host -ForegroundColor Yellow $ControllerType.Type
+#$SetVM = $CreateVM | Get-ScsiController | Set-ScsiController -Type $ControllerType.Type
 Write-Host ""
 Write-Host -ForegroundColor Gray "Creating Protective Snapshot"
 $VMSnapShot = $CreateVM | New-Snapshot -Name "BS4IT P2VME Protective Snapshot" -Description "Please do not remove this snapshot during the conversion proccess." -Memory:$false -Confirm:$false
 if ( $installed_os -like 'win*' ) {
-    Write-Host -ForegroundColor Gray "Windows VM - Inserting Device Cleanup ISO"
-    $CreateVM | Get-CDDrive | Set-CDDrive -StartConnected $true -IsoPath "[$SelectedDataStore] devicecleanup.iso" -Confirm:$false
+    Write-Host -ForegroundColor Gray "Windows VM - Inserting Driver Injection Tool ISO"
+    $CreateVM | Get-CDDrive | Set-CDDrive -StartConnected $true -IsoPath "[$SelectedDataStore] p2vme-driver-injection.iso" -Confirm:$false
 }
 Write-Host ""
 Write-Host -ForegroundColor Gray "Done."
