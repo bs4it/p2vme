@@ -171,7 +171,7 @@
 
                     <p class="card-text">If all the boxes are green you're good to go to the next step.
                     <br>Download <a href="p2vme.ps1">p2vme.ps1</a> and run it on a <b>vSphere PowerCLI</b> enabled system to create virtual machines out of this conversion instance.
-                    <br>If something went wrong, please check and try again.
+                    <p>If something went wrong, please check and try again.
                     
                 <?php }} else {
                             if (file_exists ("p2vme.json") && !isset($_POST['clear_config']))   { ?>
