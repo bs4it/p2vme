@@ -169,8 +169,9 @@
 
 
 
-                    <p>If all the boxes are green you're good to go to the next step, just close this window. <b>  </b>
-                    <br>If something went wrong, please check and try again.
+                    <p class="card-text">If all the boxes are green you're good to go to the next step.
+                    <br>Download <a href="p2vme.ps1">p2vme.ps1</a> and run it on a <b>vSphere PowerCLI</b> enabled system to create virtual machines out of this conversion instance.
+                    <p>If something went wrong, please check and try again.
                     
                 <?php }} else {
                             if (file_exists ("p2vme.json") && !isset($_POST['clear_config']))   { ?>
@@ -394,8 +395,8 @@
                     <?php }
                         }?>
                 </div>
-            </div>
-        </div>
+            </div> 
+        </div> 
     </div>
     <script src="./js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </body>
