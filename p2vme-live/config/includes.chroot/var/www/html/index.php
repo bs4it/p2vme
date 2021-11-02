@@ -85,7 +85,7 @@
                         #$target_id = str_replace(array("\n", "\r"), '', $target_id );
                         $tgt_conf = "default-driver iscsi\n";
                         $tgt_conf = $tgt_conf . "<target iqn.2014-04.br.com.bs4it:" . $target_id . ">\n";
-                        $tgt_conf = $tgt_conf . "   controller_tid " . hexdec($target_id) . "\n";
+                        $tgt_conf = $tgt_conf . "   controller_tid " . substr((hexdec($target_id)), 0, 9) . "\n";
                         $tgt_conf = $tgt_conf . "   vendor_id BS4IT\n";
                         $i = 1;
                         $d = 0;
@@ -352,7 +352,7 @@
                                             <option value="ubuntu64Guest">Ubuntu Linux (64-bit)</option>
                                             <option value="ubuntuGuest">Ubuntu Linux (32-bit)</option>
                                             <option value="winNetStandard64Guest">Windows Server 2003 (64-bit)</option>
-                                            <option value="winNetStandardGuest">Windows Server 2003 (64-bit)</option>
+                                            <option value="winNetStandardGuest">Windows Server 2003 (32-bit)</option>
                                             <option value="windows7Server64Guest">Windows Server 2008 R2 (64-bit)</option>
                                             <option value="windows8Server64Guest">Windows Server 2012 (64-bit)</option>
                                             <option value="windows9Server64Guest">Windows Server 2016 or later (64-bit)</option>

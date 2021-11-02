@@ -73,7 +73,7 @@ $installed_os_text = switch ($installed_os) {
     "ubuntu64Guest"  {"Ubuntu Linux (64-bit)"; break}
     "ubuntuGuest"  {"Ubuntu Linux (32-bit)"; break}
     "winNetStandard64Guest"  {"Windows Server 2003 (64-bit)"; break}
-    "winNetStandardGuest"  {"Windows Server 2003 (64-bit)"; break}
+    "winNetStandardGuest"  {"Windows Server 2003 (32-bit)"; break}
     "windows7Server64Guest"  {"Windows Server 2008 R2 (64-bit)"; break}
     "windows8Server64Guest"  {"Windows Server 2012 (64-bit)"; break}
     "windows9Server64Guest"  {"Windows Server 2016 or later (64-bit)"; break}
@@ -224,7 +224,7 @@ Start-Sleep -Milliseconds 500
 
 
 # Get Selected Network
-$HostNetworks = $SelectedHost | Get-VirtualPortGroup | Sort
+$HostNetworks = $SelectedHost | Get-VirtualPortGroup | Sort-Object
 $errmsg = ""
 do {
     Clear-Host
