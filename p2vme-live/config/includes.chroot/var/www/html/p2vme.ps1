@@ -181,7 +181,7 @@ if ($vcenter_conn.IsConnected -ne $true) {
     }
 }
 # GET SELECTED HOST
-$vSphereHosts = Get-VMHost
+$vSphereHosts = @(Get-VMHost)
 $errmsg = ""
 do {
     Clear-Host
@@ -202,7 +202,7 @@ Start-Sleep -Milliseconds 500
 
 
 # GET SELECTED DATASTORE
-$HostDatastores = $SelectedHost | Get-Datastore
+$HostDatastores = @($SelectedHost | Get-Datastore)
 $errmsg = ""
 do {
     Clear-Host
@@ -224,7 +224,7 @@ Start-Sleep -Milliseconds 500
 
 
 # Get Selected Network
-$HostNetworks = $SelectedHost | Get-VirtualPortGroup | Sort-Object
+$HostNetworks = @($SelectedHost | Get-VirtualPortGroup | Sort)
 $errmsg = ""
 do {
     Clear-Host
