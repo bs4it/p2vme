@@ -257,9 +257,9 @@ Write-Host -ForegroundColor Green "Checking for iSCSI connection "
 Write-Host ""
 # Create iSCSI Connection
 $iSCSItargetIP = $IP
-$hba = $SelectedHost | Get-VMHostHba -Type IScsi | Where {$_.Model -eq "iSCSI Software Adapter"}
+$hba = $SelectedHost | Get-VMHostHba -Type IScsi | Where-Object {$_.Model -eq "iSCSI Software Adapter"}
 # Check to see if the SendTarget exist, if not add it
-if (Get-IScsiHbaTarget -IScsiHba $hba -Type Send | Select-Object Address | Where {$_.Address -eq $iSCSItargetIP}) {
+if (Get-IScsiHbaTarget -IScsiHba $hba -Type Send | Select-Object Address | Where-Object {$_.Address -eq $iSCSItargetIP}) {
     Write-Host -NoNewline -ForegroundColor Gray "The target "
     Write-Host -NoNewline -ForegroundColor Yellow $iSCSItargetIP
     Write-Host -NoNewline -ForegroundColor Gray " does exist on "
